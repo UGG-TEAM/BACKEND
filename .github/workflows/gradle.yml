@@ -32,10 +32,10 @@ jobs:
       - name: Run chmod to make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Set yml file 
-        uses: microsoft/variable-substitution@v1
-        with:
-          files: ${{ env.RESOURCE_PATH }} 
+      #- name: Set yml file 
+      #  uses: microsoft/variable-substitution@v1
+      #  with:
+      #    files: ${{ env.RESOURCE_PATH }} 
 
       # 1.4 Spring Boot 애플리케이션 빌드
       - name: Build with Gradle
