@@ -1,6 +1,6 @@
 name: Java CI with Gradle
 env:
-  RESOURCE_PATH: BACKEND/src/main/resources/application.yml
+  RESOURCE_PATH: src/main/resources/application.yml
 
 # 동작 조건 설정: master 브랜치에 push 또는 pull request가 발생할 경우 실행
 on:
