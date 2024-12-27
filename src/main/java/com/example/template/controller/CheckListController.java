@@ -4,14 +4,12 @@ import com.example.template.common.response.ApiResponse;
 import com.example.template.common.response.status.SuccessCode;
 import com.example.template.dto.CheckListDTO;
 import com.example.template.entity.CheckList;
+import com.example.template.entity.Member;
 import com.example.template.service.CheckListService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +26,12 @@ public class CheckListController {
     public ApiResponse<List<CheckListDTO>> getInCompleteCheckList(@RequestParam boolean isChecked) {
         List<CheckListDTO> checkListDTOList = checkListService.getCheckList(1L, isChecked);
         return ApiResponse.onSuccess(checkListDTOList);
+    }
 
+    @PostMapping
+    @Operation(summary = "체크리스트 추가입니다.")
+    public ApiResponse<?> addCheckList(@RequestParam Long memberId, @RequestParam Long programId) {
+        checkListService.addCheckList(1L, programId);
+        return ApiResponse.onSuccess(null);
     }
 }

@@ -28,6 +28,8 @@ public enum ErrorCode implements BaseErrorCode {
 
     UNSIGNED(HttpStatus.BAD_REQUEST, "POST4001", "로그인 되어 있지 않습니다."),
 
+    PROGRAM_NOTFOUND(HttpStatus.BAD_REQUEST, "PROGRAM4001", "해당 프로그램이 존재하지 않습니다.");
+
     ;
 
 
