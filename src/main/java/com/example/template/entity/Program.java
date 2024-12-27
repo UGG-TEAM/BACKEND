@@ -28,37 +28,40 @@ public class Program {
     @Column(nullable = false)
     private String title;
 
-    private LocalDate postDate;
+    private String postDate;
 
-    private boolean isOnce;
+    private String isOnce;
 
-    @Enumerated(EnumType.STRING)
-    private Region region;
+    private String region;
 
-    @Enumerated(EnumType.STRING)
-    private Category category;
+    @Column(length = 1000)  // 컬럼 길이를 1000으로 수정
+    private String category;
 
-    @Enumerated(EnumType.STRING)
-    private TargetType targetType;
+    @Column(length = 1000)  // 컬럼 길이를 1000으로 수정
+    private String targetType;
 
-    @Enumerated(EnumType.STRING)
-    private ProgramType programType;
+    @Column(length = 1000)  // 컬럼 길이를 1000으로 수정
+    private String programType;
 
-    @Enumerated(EnumType.STRING)
-    private HostType hostType;
+    @Column(length = 1000)  // 컬럼 길이를 1000으로 수정
+    private String hostType;
 
+    @Column(length = 1000)  // 컬럼 길이를 1000으로 수정
     private String target;
 
+    @Column(length = 1000)  // 컬럼 길이를 1000으로 수정
     private String content;
 
-    private int minAge;
+    private String minAge;
 
-    private int maxAge;
+    private String maxAge;
 
-    private int cost;
+    @Column(length = 1000)  // 컬럼 길이를 1000으로 수정
+    private String cost;
 
     private String location;
 
+    @Column(length = 1000)  // 컬럼 길이를 1000으로 수정
     private String homePage;
 
     private String host;
@@ -71,9 +74,9 @@ public class Program {
 
     private String sponsor;
 
-    private LocalDate startDate;
+    private String startDate;
 
-    private LocalDate endDate;
+    private String endDate;
 
     @OneToMany(mappedBy = "program", cascade = CascadeType.ALL)
     private List<CheckList> checkListList = new ArrayList<>();
