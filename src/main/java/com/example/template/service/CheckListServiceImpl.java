@@ -79,6 +79,14 @@ public class CheckListServiceImpl implements CheckListService {
         return toCheckListCompleteResponseDTO(checkList);
     }
 
+    public List<CheckListDTO> getAllCheckListByMemberId() {
+        List<CheckList> checkLists = checkListRepository.findAllByMemberId(1L);
+
+        return checkLists.stream()
+                .map(this::toCheckListDto) // 변환 메서드 호출
+                .collect(Collectors.toList()); // 리스트로 반환
+    }
+
     public List<CheckListDTO> getDateCheckList(MonthDay monthDay) {
 
         List<CheckList> checkLists = checkListRepository.findAllByFinishDate(monthDay);

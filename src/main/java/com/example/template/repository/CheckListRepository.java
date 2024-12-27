@@ -18,4 +18,6 @@ public interface CheckListRepository extends JpaRepository<CheckList, Long> {
     List<CheckList> findAllByFinishDate(@Param("monthDay") MonthDay monthDay);
 
     List<CheckList> findAllByMember(Member member);
+
+    List<CheckList> findAllByMemberId(Long memberId);
 }

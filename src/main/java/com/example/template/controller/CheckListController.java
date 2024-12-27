@@ -56,4 +56,10 @@ public class CheckListController {
     public ApiResponse<List<CheckListDTO>> dateCheckList(@RequestParam MonthDay monthDay) {
         return ApiResponse.onSuccess(checkListService.getDateCheckList(monthDay));
     }
+
+    @GetMapping("checklistall")
+    @Operation(summary = "모든 체크리스트 반환")
+    public ApiResponse<List<CheckListDTO>> getAllCheckList() {
+        return ApiResponse.onSuccess(checkListService.getAllCheckList(1L));
+    }
 }
