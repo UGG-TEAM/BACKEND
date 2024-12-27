@@ -31,7 +31,7 @@ public class ProgramController {
 
     @PostMapping("/recommend")
     @Operation(summary = "추천된 사업들입니다. + 멘트")
-    public ApiResponse<RecommendProgramResponseDTO> getRecommendProgram(RecommendProgramRequestDTO recommendProgramRequestDTO) {
+    public ApiResponse<RecommendProgramResponseDTO> getRecommendProgram(@RequestBody RecommendProgramRequestDTO recommendProgramRequestDTO) {
         return ApiResponse.of(SuccessCode._OK, programService.getRecommendPrograms(recommendProgramRequestDTO));
     }
 }
