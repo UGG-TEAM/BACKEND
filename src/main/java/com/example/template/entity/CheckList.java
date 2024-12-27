@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.time.LocalDate;
+
 @Getter
 @Builder
 @NoArgsConstructor
@@ -28,7 +30,8 @@ public class CheckList {
     @JoinColumn(name = "program_id")
     private Program program;
 
-
     @ColumnDefault("False")
     private boolean isCheck;
+
+    private LocalDate finishDate;
 }
