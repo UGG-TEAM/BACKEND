@@ -24,12 +24,14 @@ public class ProgramController {
 
     @GetMapping("/home")
     @Operation(summary = "홈 화면에 불러올 사업들입니다.")
+    @CrossOrigin
     public ApiResponse<List<HomeProgramDTO>> getHomeProgram(@RequestParam int page) {
         return ApiResponse.of(SuccessCode._OK, programService.getHomePrograms(page));
     }
 
     @PostMapping("/recommend")
     @Operation(summary = "추천된 사업들입니다. + 멘트")
+    @CrossOrigin
     public ApiResponse<RecommendProgramResponseDTO> getRecommendProgram(RecommendProgramRequestDTO recommendProgramRequestDTO) {
         return ApiResponse.of(SuccessCode._OK, programService.getRecommendPrograms(recommendProgramRequestDTO));
     }

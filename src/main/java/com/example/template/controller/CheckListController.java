@@ -25,6 +25,7 @@ public class CheckListController {
 
     @GetMapping("checklist")
     @Operation(summary = "미완료 체크리스트입니다.")
+    @CrossOrigin
     public ApiResponse<List<CheckListDTO>> getInCompleteCheckList(@RequestParam boolean isChecked) {
         List<CheckListDTO> checkListDTOList = checkListService.getCheckList(1L, isChecked);
         return ApiResponse.onSuccess(checkListDTOList);
@@ -32,6 +33,7 @@ public class CheckListController {
 
     @GetMapping("allchecklist")
     @Operation(summary = "전체 체크리스트입니다.")
+    @CrossOrigin
     public ApiResponse<List<CheckListDTO>> getInCompleteCheckList() {
         List<CheckListDTO> checkListDTOList = checkListService.getAllCheckList(1L);
         return ApiResponse.onSuccess(checkListDTOList);
@@ -39,6 +41,7 @@ public class CheckListController {
 
     @PostMapping("checklistadd")
     @Operation(summary = "체크리스트 추가입니다.")
+    @CrossOrigin
     public ApiResponse<?> addCheckList(@RequestParam Long memberId, @RequestParam Long programId) {
         checkListService.addCheckList(1L, programId);
         return ApiResponse.onSuccess(null);
@@ -46,12 +49,14 @@ public class CheckListController {
 
     @PostMapping("checklistcomplete")
     @Operation(summary = "체크리스트 완료입니다.")
+    @CrossOrigin
     public ApiResponse<?> completeCheckList(@RequestParam Long checkListId) {
         return ApiResponse.onSuccess(checkListService.completeCheckList(checkListId));
     }
 
     @PostMapping("checklistdate")
     @Operation(summary = "특정 날짜에 해당하는 체크리스트 반환")
+    @CrossOrigin
     public ApiResponse<List<CheckListDTO>> dateCheckList(@RequestParam MonthDay monthDay) {
         return ApiResponse.onSuccess(checkListService.getDateCheckList(monthDay));
     }
