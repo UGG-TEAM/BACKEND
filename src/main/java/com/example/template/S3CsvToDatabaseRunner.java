@@ -54,7 +54,7 @@ public class S3CsvToDatabaseRunner implements CommandLineRunner {
                 .isCheck(true)
                 .member(member)
                 .program(programRepository.findById(3L))
-                .finishDate(monthDay1)
+                .finishDate(monthDay2)
                 .build();
 
         CheckList checkList4 = CheckList

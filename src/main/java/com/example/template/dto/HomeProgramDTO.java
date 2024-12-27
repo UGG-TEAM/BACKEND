@@ -14,4 +14,5 @@ public class HomeProgramDTO {
     String target;
     String type;
     String content;
+    String website;
 }

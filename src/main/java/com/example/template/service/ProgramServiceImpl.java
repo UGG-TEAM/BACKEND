@@ -84,6 +84,7 @@ public class ProgramServiceImpl implements ProgramService {
                         .target(parse(program.getTargetType()))
                         .type(parse(program.getProgramType()))
                         .content(program.getContent())
+                        .website(program.getHomePage())
                         .build())
                 .toList();
     }
