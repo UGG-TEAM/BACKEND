@@ -1,4 +1,4 @@
-package com.example.template.domain.example.controller;
+package com.example.template.controller;
 
 import com.example.template.common.response.ApiResponse;
 import com.example.template.common.response.status.SuccessCode;
