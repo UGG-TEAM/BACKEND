@@ -34,7 +34,7 @@ public class ProgramServiceImpl implements ProgramService {
 
         Pageable pageable = PageRequest.of(page, 5);
 
-        return toHomeProgramDTO(programRepository.findAllByOrderByPostDateDesc(pageable).getContent());
+        return toHomeProgramDTO(programRepository.findAllByOrderByPostDateDesc(pageable).getContent(), page);
     }
 
     public List<RecommendProgramDTO> getRecommendPrograms(String category) {
@@ -72,7 +72,7 @@ public class ProgramServiceImpl implements ProgramService {
         };
     }
 
-    private List<HomeProgramDTO> toHomeProgramDTO(List<Program> programs) {
+    private List<HomeProgramDTO> toHomeProgramDTO(List<Program> programs, int page) {
 
         log.info("program 데이터베이스에서 조회 : ", programs.size());
 
@@ -84,7 +84,7 @@ public class ProgramServiceImpl implements ProgramService {
                         .target(parse(program.getTargetType()))
                         .type(parse(program.getProgramType()))
                         .content(program.getContent())
-                        .website(program.getHomePage())
+                        .currentPage(page)
                         .build())
                 .toList();
     }
@@ -111,9 +111,6 @@ public class ProgramServiceImpl implements ProgramService {
 
         // 반환되는 데이터 구조가 JSON 객체일 경우 Map으로 받아오기
         Map<String, Object> response = restTemplate.postForObject(url, entity, Map.class);
-
-        // 예시: "data" 키에 해당하는 값은 List로 받기
-        List<String> data = (List<String>) response.get("data");
 
         log.info(response.toString());
 
