@@ -14,7 +14,6 @@ spring:
       path: /h2-console
       settings:
         web-allow-others: true  # 원격 연결 허용 설정
-
 cloud:
   aws:
     credentials:
@@ -30,3 +29,4 @@ cloud:
 aws:
   s3:
     bucket: ${AWS_BUCKET_NAME}
+
