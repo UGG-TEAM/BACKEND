@@ -7,6 +7,7 @@ import com.example.template.dto.RecommendProgramDTO;
 import com.example.template.dto.RecommendProgramRequestDTO;
 import com.example.template.dto.RecommendProgramResponseDTO;
 import com.example.template.service.ProgramService;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,7 @@ public class ProgramController {
 
     @PostMapping("/recommend")
     @Operation(summary = "추천된 사업들입니다. + 멘트")
-    public ApiResponse<RecommendProgramResponseDTO> getRecommendProgram(@RequestBody RecommendProgramRequestDTO recommendProgramRequestDTO) {
+    public ApiResponse<RecommendProgramResponseDTO> getRecommendProgram(@JsonProperty RecommendProgramRequestDTO recommendProgramRequestDTO) {
         return ApiResponse.of(SuccessCode._OK, programService.getRecommendPrograms(recommendProgramRequestDTO));
     }
 }
