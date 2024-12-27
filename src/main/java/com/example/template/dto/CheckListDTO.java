@@ -14,6 +14,7 @@ import java.time.LocalDate;
 public class CheckListDTO {
 
     private Long id;
+    private Long programId;
     private String programName;
     private String content;
     private boolean isChecked;

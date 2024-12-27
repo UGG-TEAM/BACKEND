@@ -53,9 +53,20 @@ public class CheckListServiceImpl implements CheckListService {
         return;
     }
 
+    @Override
+    public void completeCheckList(Long checkListId) {
+
+        CheckList checkList = (CheckList) checkListRepository.findById(checkListId).orElseThrow(()->new GeneralHandler(ErrorCode._BAD_REQUEST));
+        checkList.setCheck(true);
+        checkListRepository.save(checkList);
+
+        return;
+    }
+
     public CheckListDTO toCheckListDto(CheckList checkList){
         return CheckListDTO.builder()
-                .id(checkList.getProgram().getId())
+                .id(checkList.getId())
+                .programId(checkList.getProgram().getId())
                 .programName(checkList.getProgram().getTitle())
                 .content(checkList.getProgram().getContent())
                 .isChecked(checkList.isCheck())

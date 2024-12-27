@@ -9,4 +9,6 @@ public interface CheckListService {
     List<CheckListDTO> getCheckList(Long memberId, boolean isChecked);
 
     void addCheckList(Long memberId, Long programId);
+
+    void completeCheckList(Long checkListId);
 }
