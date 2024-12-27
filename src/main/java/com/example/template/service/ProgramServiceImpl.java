@@ -104,7 +104,7 @@ public class ProgramServiceImpl implements ProgramService {
     public RecommendProgramResponseDTO getRecommendPrograms(RecommendProgramRequestDTO recommendProgramRequestDTO) {
         String url = "https://dcd9-34-31-16-244.ngrok-free.app/predict";
 
-        log.info(String.valueOf(recommendProgramRequestDTO));
+        log.info(recommendProgramRequestDTO.getProgram_method());
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
