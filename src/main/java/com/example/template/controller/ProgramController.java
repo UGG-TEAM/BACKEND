@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "캐스트 API", description = "캐스트 관련 API입니다")
+@Tag(name = "정책 관련 API", description = "정책 관련 API입니다")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/example")
-public class ExampleController {
+@RequestMapping("/api/program")
+public class ProgramController {
 
-    @GetMapping("/keyword")
-    @Operation(summary = "예시 API 입니다")
+    @GetMapping("/home")
+    @Operation(summary = "홈 화면에 불러올 사업들입니다.")
     public ApiResponse<String> createCastByKeyword() {
         return ApiResponse.of(SuccessCode._OK, "성공입니다");
     }
