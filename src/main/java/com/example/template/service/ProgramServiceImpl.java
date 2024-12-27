@@ -1,17 +1,24 @@
 package com.example.template.service;
 
-import com.example.template.common.exception.GeneralException;
 import com.example.template.common.exception.handler.GeneralHandler;
 import com.example.template.common.response.status.ErrorCode;
 import com.example.template.dto.HomeProgramDTO;
 import com.example.template.dto.RecommendProgramDTO;
+import com.example.template.dto.RecommendProgramRequestDTO;
+import com.example.template.dto.RecommendProgramResponseDTO;
 import com.example.template.entity.Program;
 import com.example.template.repository.ProgramRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +29,7 @@ import java.util.List;
 public class ProgramServiceImpl implements ProgramService {
 
     private final ProgramRepository programRepository;
+    private final RestTemplate restTemplate;
 
     public List<HomeProgramDTO> getHomePrograms(int page) {
 
@@ -63,7 +71,6 @@ public class ProgramServiceImpl implements ProgramService {
             }
             default -> throw new GeneralHandler(ErrorCode._BAD_REQUEST);
         };
-
     }
 
     private List<HomeProgramDTO> toHomeProgramDTO(List<Program> programs) {
@@ -92,6 +99,28 @@ public class ProgramServiceImpl implements ProgramService {
                         .content(program.getContent())
                         .build())
                 .toList();
+    }
+
+    public RecommendProgramResponseDTO getRecommendPrograms(RecommendProgramRequestDTO recommendProgramRequestDTO) {
+        String url = "https://2cc8-34-86-34-40.ngrok-free.app/predict";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<RecommendProgramRequestDTO> entity = new HttpEntity<>(recommendProgramRequestDTO, headers);
+
+        // 서버 응답을 String[]로 받아옴
+        String[] data = restTemplate.postForObject(url, entity, String[].class);
+
+        RecommendProgramResponseDTO recommendProgramResponseDTO = new RecommendProgramResponseDTO();
+
+        // 응답 데이터로 RecommendProgramDTO 리스트를 설정
+        recommendProgramResponseDTO.setRecommendProgramDTOList(getRecommendPrograms(data[0]));
+        recommendProgramResponseDTO.setComment(getComment(data[1]));
+
+        log.info("Response: {}", recommendProgramResponseDTO); // 로그 출력 개선
+
+        return recommendProgramResponseDTO;
     }
 
     private String parse(String input) {

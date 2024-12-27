@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDate;
+import java.time.MonthDay;
 
 @Getter
 @Setter
@@ -31,5 +32,5 @@ public class CheckList {
     @ColumnDefault("False")
     private boolean isCheck;
 
-    private LocalDate finishDate;
+    private MonthDay finishDate;
 }

@@ -9,9 +9,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RecommendProgramDTO {
-
-    String title;
-    String content;
-
+public class RecommendProgramResponseDTO {
+    List<RecommendProgramDTO> recommendProgramDTOList;
+    List<String> comment;
 }

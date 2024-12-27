@@ -4,6 +4,8 @@ import com.example.template.common.response.ApiResponse;
 import com.example.template.common.response.status.SuccessCode;
 import com.example.template.dto.HomeProgramDTO;
 import com.example.template.dto.RecommendProgramDTO;
+import com.example.template.dto.RecommendProgramRequestDTO;
+import com.example.template.dto.RecommendProgramResponseDTO;
 import com.example.template.service.ProgramService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,14 +29,8 @@ public class ProgramController {
     }
 
     @PostMapping("/recommend")
-    @Operation(summary = "추천된 사업들입니다.")
-    public ApiResponse<List<RecommendProgramDTO>> getRecommendProgram(String category) {
-        return ApiResponse.of(SuccessCode._OK, programService.getRecommendPrograms(category));
-    }
-
-    @PostMapping("/comment")
-    @Operation(summary = "멘트입니다.")
-    public ApiResponse<List<String>> getComment(String type) {
-        return ApiResponse.of(SuccessCode._OK, programService.getComment(type));
+    @Operation(summary = "추천된 사업들입니다. + 멘트")
+    public ApiResponse<RecommendProgramResponseDTO> getRecommendProgram(RecommendProgramRequestDTO recommendProgramRequestDTO) {
+        return ApiResponse.of(SuccessCode._OK, programService.getRecommendPrograms(recommendProgramRequestDTO));
     }
 }
