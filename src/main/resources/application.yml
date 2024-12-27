@@ -14,3 +14,19 @@ spring:
       path: /h2-console
       settings:
         web-allow-others: true  # 원격 연결 허용 설정
+
+cloud:
+  aws:
+    credentials:
+      instance-profile: false
+      access-key: ${AWS_ACCESS_KEY}
+      secret-key: ${AWS_SECRET_KEY}
+    region:
+      auto: false
+      static: ap-northeast-2
+    stack:
+      auto: false
+
+aws:
+  s3:
+    bucket: ${AWS_BUCKET_NAME}
