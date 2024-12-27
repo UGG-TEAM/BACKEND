@@ -22,7 +22,7 @@ public class CheckListServiceImpl implements CheckListService {
     final CheckListRepository checkListRepository;
 
     @Override
-    public List<CheckListDTO> getCheckList(Long memberId) {
+    public List<CheckListDTO> getCheckList(Long memberId, boolean isChecked) {
         Member member = (Member) memberRepository.findById(memberId)
                 .orElseThrow(() -> new PostHandler(ErrorCode.MEMBER_NOT_FOUND));
 

@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CheckListService {
 
-    List<CheckListDTO> getCheckList(Long memberId);
+    List<CheckListDTO> getCheckList(Long memberId, boolean isChecked);
 }
