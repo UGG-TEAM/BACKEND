@@ -8,8 +8,6 @@ import com.example.template.dto.RecommendProgramRequestDTO;
 import com.example.template.dto.RecommendProgramResponseDTO;
 import com.example.template.entity.Program;
 import com.example.template.repository.ProgramRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -102,21 +101,26 @@ public class ProgramServiceImpl implements ProgramService {
     }
 
     public RecommendProgramResponseDTO getRecommendPrograms(RecommendProgramRequestDTO recommendProgramRequestDTO) {
-        String url = "https://2cc8-34-86-34-40.ngrok-free.app/predict";
+        String url = "https://dcd9-34-31-16-244.ngrok-free.app/predict";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<RecommendProgramRequestDTO> entity = new HttpEntity<>(recommendProgramRequestDTO, headers);
 
-        // 서버 응답을 String[]로 받아옴
-        String[] data = restTemplate.postForObject(url, entity, String[].class);
+        // 반환되는 데이터 구조가 JSON 객체일 경우 Map으로 받아오기
+        Map<String, Object> response = restTemplate.postForObject(url, entity, Map.class);
+
+        // 예시: "data" 키에 해당하는 값은 List로 받기
+        List<String> data = (List<String>) response.get("data");
+
+        log.info(response.toString());
 
         RecommendProgramResponseDTO recommendProgramResponseDTO = new RecommendProgramResponseDTO();
 
         // 응답 데이터로 RecommendProgramDTO 리스트를 설정
-        recommendProgramResponseDTO.setRecommendProgramDTOList(getRecommendPrograms(data[0]));
-        recommendProgramResponseDTO.setComment(getComment(data[1]));
+        recommendProgramResponseDTO.setRecommendProgramDTOList(getRecommendPrograms((String) response.get("예측 지원 카테고리")));
+        recommendProgramResponseDTO.setComment(getComment((String) response.get("예측 고립 유형")));
 
         log.info("Response: {}", recommendProgramResponseDTO); // 로그 출력 개선
 
