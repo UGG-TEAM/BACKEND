@@ -1,4 +1,4 @@
-package com.example.template.dto;
+package com.example.template.domain.example.dto;
 
 import lombok.*;
 
