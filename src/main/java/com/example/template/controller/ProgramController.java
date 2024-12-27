@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -23,8 +24,8 @@ public class ProgramController {
 
     @GetMapping("/home")
     @Operation(summary = "홈 화면에 불러올 사업들입니다.")
-    public ApiResponse<List<HomeProgramDTO>> createCastByKeyword() {
-        return ApiResponse.of(SuccessCode._OK, programService.getHomePrograms());
+    public ApiResponse<List<HomeProgramDTO>> createCastByKeyword(@RequestParam int page) {
+        return ApiResponse.of(SuccessCode._OK, programService.getHomePrograms(page));
     }
 
 }

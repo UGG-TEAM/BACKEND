@@ -13,5 +13,5 @@ public class HomeProgramDTO {
     String category;
     String target;
     String type;
-    String date;
+    String content;
 }
