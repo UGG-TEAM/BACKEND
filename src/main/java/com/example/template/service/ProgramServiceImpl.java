@@ -18,9 +18,9 @@ public class ProgramServiceImpl implements ProgramService {
 
     private final ProgramRepository programRepository;
 
-    public List<HomeProgramDTO> getHomePrograms() {
+    public List<HomeProgramDTO> getHomePrograms(int page) {
 
-        Pageable pageable = PageRequest.of(0, 5);
+        Pageable pageable = PageRequest.of(page, 5);
 
         return toHomeProgramDTO(programRepository.findAllByOrderByPostDateDesc(pageable).getContent());
     }
@@ -33,11 +33,24 @@ public class ProgramServiceImpl implements ProgramService {
                 .map(program -> HomeProgramDTO.builder()
                         .title(program.getTitle())
                         .region(program.getRegion())
-                        .category(program.getCategory())
-                        .target(program.getTargetType())
-                        .type(program.getProgramType())
-                        .date(program.getPostDate())
+                        .category(parse(program.getCategory()))
+                        .target(parse(program.getTargetType()))
+                        .type(parse(program.getProgramType()))
+                        .content(program.getContent())
                         .build())
                 .toList();
+    }
+
+    private String parse(String input) {
+        if (input == null || input.isEmpty()) {
+            return ""; // 빈 문자열이나 null 처리
+        }
+        int commaIndex = input.indexOf(',');
+        // 쉼표가 없으면 전체 문자열을 반환
+        if (commaIndex == -1) {
+            return input;
+        }
+        // 쉼표 이전까지의 부분 문자열을 반환
+        return input.substring(0, commaIndex);
     }
 }
