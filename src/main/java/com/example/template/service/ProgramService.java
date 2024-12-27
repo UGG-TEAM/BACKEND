@@ -8,5 +8,5 @@ import java.util.List;
 public interface ProgramService {
     List<HomeProgramDTO> getHomePrograms(int page);
     List<RecommendProgramDTO> getRecommendPrograms(String category);
-    String getComment(String type);
+    List<String> getComment(String type);
 }

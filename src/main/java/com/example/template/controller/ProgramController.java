@@ -34,7 +34,7 @@ public class ProgramController {
 
     @PostMapping("/comment")
     @Operation(summary = "멘트입니다.")
-    public ApiResponse<String> getComment(String type) {
+    public ApiResponse<List<String>> getComment(String type) {
         return ApiResponse.of(SuccessCode._OK, programService.getComment(type));
     }
 }
