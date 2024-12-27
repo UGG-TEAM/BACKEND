@@ -17,5 +17,7 @@ public interface ProgramRepository extends JpaRepository<Program, Long> {
 
     Page<Program> findAllByCategoryContains(@Param("category") String category, Pageable pageable);
 
+    Program findById(long id);
+
 
 }
