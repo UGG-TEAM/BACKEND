@@ -1,6 +1,6 @@
 package com.example.template.service;
 
-import com.example.template.common.exception.handler.PostHandler;
+import com.example.template.common.exception.handler.GeneralHandler;
 import com.example.template.common.response.status.ErrorCode;
 import com.example.template.dto.CheckListDTO;
 import com.example.template.entity.CheckList;
@@ -8,7 +8,6 @@ import com.example.template.entity.Member;
 import com.example.template.repository.CheckListRepository;
 import com.example.template.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.collections.functors.FalsePredicate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public class CheckListServiceImpl implements CheckListService {
     @Override
     public List<CheckListDTO> getCheckList(Long memberId, boolean isChecked) {
         Member member = (Member) memberRepository.findById(memberId)
-                .orElseThrow(() -> new PostHandler(ErrorCode.MEMBER_NOT_FOUND));
+                .orElseThrow(() -> new GeneralHandler(ErrorCode.MEMBER_NOT_FOUND));
 
         List<CheckList> checkLists = checkListRepository.findAllByMemberAndIsCheck(member, false);
 
